@@ -12,6 +12,7 @@ import springfox.documentation.builders.PathSelectors
 import springfox.documentation.builders.RequestHandlerSelectors
 import springfox.documentation.spi.DocumentationType
 import springfox.documentation.spring.web.plugins.Docket
+import java.time.Clock
 
 @Configuration
 class PricingConfiguration(
@@ -21,8 +22,7 @@ class PricingConfiguration(
     private val notificationQueue: String,
     @Value("\${rabbitmq.routing-keys.internal-notification}")
     private val internalNotificationRoutingKey: String
-
-    ) {
+) {
 
     @Bean
     fun internalTopicExchange(): TopicExchange = TopicExchange(internalExchange)
@@ -30,6 +30,8 @@ class PricingConfiguration(
     @Bean
     fun pricesQueue() = Queue(notificationQueue)
 
+    @Bean
+    fun clock(): Clock = Clock.systemDefaultZone()
 
     @Bean
     fun internalToNotificationBinding(): Binding {

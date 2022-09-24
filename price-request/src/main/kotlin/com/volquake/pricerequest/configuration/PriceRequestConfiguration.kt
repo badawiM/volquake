@@ -1,6 +1,7 @@
 package com.volquake.pricerequest.configuration
 
 import io.netty.handler.logging.LogLevel
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.http.HttpHeaders
@@ -13,9 +14,13 @@ import springfox.documentation.builders.PathSelectors
 import springfox.documentation.builders.RequestHandlerSelectors
 import springfox.documentation.spi.DocumentationType
 import springfox.documentation.spring.web.plugins.Docket
+import java.time.Clock
 
 @Configuration
-class PriceRequestConfiguration {
+class PriceRequestConfiguration(
+    @Value("\${priceRequest.httpClient.wiretap:false}")
+    private val wiretap: Boolean
+ ) {
 
     @Bean
     fun api(): Docket {
@@ -27,20 +32,27 @@ class PriceRequestConfiguration {
     }
 
     @Bean
-    fun httpClient() = HttpClient
-        .create()
-        .wiretap(
-            "reactor.netty.http.client.HttpClient",
-            LogLevel.DEBUG, AdvancedByteBufFormat.TEXTUAL);
+    fun clock() : Clock = Clock.systemDefaultZone()
 
     @Bean
-    fun webClient(httpClient: HttpClient): WebClient{
+    fun httpClient(): HttpClient {
+        return if (wiretap) {
+            HttpClient.create().wiretap(
+                "reactor.netty.http.client.HttpClient",
+                LogLevel.DEBUG, AdvancedByteBufFormat.TEXTUAL)
+        } else {
+            HttpClient.create()
+        }
+    }
+
+    @Bean
+    fun webClient(httpClient: HttpClient): WebClient {
         return WebClient
             .builder()
             .baseUrl("http://localhost:8080")
             .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_EVENT_STREAM_VALUE)
-            .clientConnector( ReactorClientHttpConnector(httpClient))
+            .clientConnector(ReactorClientHttpConnector(httpClient))
             .build()
     }
-
 }
+

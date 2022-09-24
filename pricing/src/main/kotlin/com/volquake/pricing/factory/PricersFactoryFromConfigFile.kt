@@ -14,8 +14,10 @@ import java.time.Clock
 
 @Component
 @Primary
-class PricersFactoryFromConfigFile(@Value("\${publisher.configurationFile}") filename: String, private val clock: Clock = Clock.systemUTC()):
-    PricersFactory {
+class PricersFactoryFromConfigFile(
+    @Value("\${publisher.configurationFile}") filename: String,
+    private val clock: Clock
+): PricersFactory {
 
     private val parameters = readCsvFile<StochasticProcessParameters>(filename)
 

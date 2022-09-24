@@ -24,6 +24,11 @@
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.12.0</version>
+		</dependency>
+		<dependency>
 			<groupId>com.volquake</groupId>
 			<artifactId>amqp-config</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
