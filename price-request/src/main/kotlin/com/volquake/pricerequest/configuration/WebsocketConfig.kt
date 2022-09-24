@@ -76,7 +76,3 @@ class WebSocketConfig(
     fun heartBeatScheduler() = ThreadPoolTaskScheduler()
 
 }
-
-object StompTopics{
-    const val topicPrefix = "/topic"
-}
