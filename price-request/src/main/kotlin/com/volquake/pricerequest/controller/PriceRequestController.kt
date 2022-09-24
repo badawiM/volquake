@@ -1,8 +1,13 @@
 package com.volquake.pricerequest.controller
 
 import com.volquake.common.logger
+import com.volquake.pricerequest.configuration.StompTopics
 import com.volquake.stochastic.BidOfferPrice
 import org.apache.commons.lang3.RandomStringUtils
+import org.springframework.messaging.Message
+import org.springframework.messaging.MessageHeaders
+import org.springframework.messaging.simp.SimpMessagingTemplate
+import org.springframework.messaging.support.GenericMessage
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RestController
@@ -15,6 +20,7 @@ import java.util.*
 @RestController
 class PriceRequestController(
     private val webClient: WebClient,
+    private val simpMessagingTemplate: SimpMessagingTemplate,
     private val clock: Clock
 ) {
 
@@ -35,6 +41,7 @@ class PriceRequestController(
             .bodyToFlux(BidOfferPrice::class.java)
             .doOnNext{
                 logger().info("Received @${LocalDateTime.now(clock)} ${it.underlying}[${it.priceDateTime}] = ${it.bid}/${it.offer}")
+                simpMessagingTemplate.send("${StompTopics.topicPrefix}", GenericMessage(it, MessageHeaders(emptyMap())))
             }
 
 
