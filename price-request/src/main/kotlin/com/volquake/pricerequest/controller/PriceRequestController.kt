@@ -15,12 +15,11 @@ import org.springframework.web.reactive.function.client.WebClient
 import reactor.core.publisher.Flux
 import java.time.Clock
 import java.time.LocalDateTime
-import java.util.*
 
 @RestController
 class PriceRequestController(
     private val webClient: WebClient,
-    private val simpMessagingTemplate: SimpMessagingTemplate,
+    private val websocketPublisher: PriceWebsocketPublisher,
     private val clock: Clock
 ) {
 
@@ -40,8 +39,7 @@ class PriceRequestController(
             .retrieve()
             .bodyToFlux(BidOfferPrice::class.java)
             .doOnNext{
-                logger().info("Received @${LocalDateTime.now(clock)} ${it.underlying}[${it.priceDateTime}] = ${it.bid}/${it.offer}")
-                simpMessagingTemplate.send("${StompTopics.topicPrefix}", GenericMessage(it, MessageHeaders(emptyMap())))
+                websocketPublisher.publish(subscriptionId,it)
             }
 
 
