@@ -1,6 +1,5 @@
 package com.volquake.pricerequest.configuration
 
-
 import com.volquake.common.Jackson
 import com.volquake.common.logger
 import org.springframework.beans.factory.annotation.Value
@@ -10,7 +9,6 @@ import org.springframework.messaging.converter.DefaultContentTypeResolver
 import org.springframework.messaging.converter.MappingJackson2MessageConverter
 import org.springframework.messaging.converter.MessageConverter
 import org.springframework.messaging.simp.config.MessageBrokerRegistry
-
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler
 import org.springframework.util.MimeTypeUtils
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker
@@ -19,6 +17,7 @@ import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerCo
 import org.springframework.web.socket.config.annotation.WebSocketTransportRegistration
 import org.springframework.web.socket.server.standard.UndertowRequestUpgradeStrategy
 import org.springframework.web.socket.server.support.DefaultHandshakeHandler
+
 
 @Configuration
 @EnableWebSocketMessageBroker
