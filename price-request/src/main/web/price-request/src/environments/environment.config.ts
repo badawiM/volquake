@@ -3,8 +3,7 @@ import {InjectionToken} from "@angular/core";
 export interface EnvironmentConfig {
   production: boolean,
   webSocketEndpoint: string,
-  useStubStompService: boolean,
-  blotterAppPath: string
+  useStubStompService: boolean
 }
 
 export type Environment = EnvironmentConfig
