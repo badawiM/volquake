@@ -17,11 +17,11 @@ class PriceWebsocketPublisher(
 ) {
 
     fun publish(subscriptionId: String, price: BidOfferPrice) {
-        logger().info("Publishing @${LocalDateTime.now(clock)} to websocket: ${price.underlying}[${price.priceDateTime}] = ${price.bid}/${price.offer}")
-
-        simpMessagingTemplate.send(
-            "${StompTopics.topicPrefix}/$subscriptionId",
-            GenericMessage(price, MessageHeaders(emptyMap()))
+        val destination = "${StompTopics.topicPrefix}/pricestream"
+        logger().info("Publishing @${LocalDateTime.now(clock)} to websocket destination $destination: ${price.underlying}[${price.priceDateTime}] = ${price.bid}/${price.offer}")
+        simpMessagingTemplate.convertAndSend(
+            destination,
+            price,
         )
     }
 

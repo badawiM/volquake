@@ -17,6 +17,10 @@ class PriceStompController(
     private val clock: Clock
 ) {
 
+    companion object{
+        const val EXPECTED_DESTINATION = "/topic/pricestream"
+    }
+
     private val subscribedStreams = mutableMapOf<SessionSubscriptionId, SubscribedStream>()
 
     @EventListener
@@ -24,15 +28,16 @@ class PriceStompController(
         val sessionId = event.header("simpSessionId")
         val subscriptionId = event.header("simpSubscriptionId")
         val destination = event.header("simpDestination")
-        if (!destination.startsWith("/topic/pricestream")) {
-            error("Wrong destination")
+
+        if (!destination.startsWith(EXPECTED_DESTINATION)) {
+            error("Wrong destination as expect $EXPECTED_DESTINATION but was $destination")
         }
         val streamId = destination.split("/").last()
         logger().info("About to call getPriceStream($streamId)")
         val topic = stompTopic("pricestream/$streamId")
         val stream = priceRequestController.requestPrice("VOD.L")
             .doOnError {
-                logger().error("Error occured getting price", it)
+                logger().error("Error occurred getting price", it)
             }
             .doOnCancel() {
                 logger().error("Price stream cancelled",)

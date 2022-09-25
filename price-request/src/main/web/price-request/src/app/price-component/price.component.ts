@@ -7,10 +7,13 @@ import {BidAskPrice} from "../price-service";
   templateUrl: './price.component.html',
   styleUrls: ['./price.component.scss']
 })
-export class PriceComponent {
+export class PriceComponent implements OnInit{
   title = 'price-tile';
 
   @Input() price: BidAskPrice
 
+  ngOnInit(): void {
+
+  }
 
 }
