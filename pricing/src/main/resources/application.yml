@@ -20,5 +20,5 @@ rabbitmq:
 
 publisher:
   configurationFile: stocks.csv
-  intervalInMills: 1000
+  intervalInMills: 50
 

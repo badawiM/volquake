@@ -9,7 +9,7 @@
 ./.idea/**
 
 # web
-**/dist/**
+**/dist
 **/node_modules
 **/node
 
