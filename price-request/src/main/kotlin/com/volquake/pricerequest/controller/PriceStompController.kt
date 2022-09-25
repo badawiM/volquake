@@ -9,6 +9,7 @@ import org.springframework.web.socket.messaging.SessionDisconnectEvent
 import org.springframework.web.socket.messaging.SessionSubscribeEvent
 import reactor.core.Disposable
 import java.time.Clock
+import java.time.LocalDateTime
 
 @Controller
 class PriceStompController(
@@ -43,7 +44,7 @@ class PriceStompController(
                 logger().error("Price stream cancelled",)
             }
             .subscribe {
-                websocketPublisher.publish(topic, it)
+                websocketPublisher.publish(topic, it.copy(publishTime = LocalDateTime.now(clock)))
             }
         logger().info("Subscribed to stream with topic = ${topic}")
         subscribedStreams[sessionSubscription(sessionId,subscriptionId)] = SubscribedStream(streamId, stream)

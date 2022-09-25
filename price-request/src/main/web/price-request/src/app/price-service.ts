@@ -15,7 +15,11 @@ export class PriceService{
     return this.stompService.watch(topic).pipe(
       filter(message => message != null),
       tap( message => console.log(`Received ${JSON.parse(message.body)}`)),
-      map( message => JSON.parse(message.body) as BidAskPrice)
+      map( message => {
+        let price = JSON.parse(message.body)
+        return {...price, receivedTime: new Date() } as BidAskPrice
+      })
+
     )
 
   }
@@ -32,5 +36,8 @@ export interface BidAskPrice{
   underlying: string,
   bid: number,
   offer: number,
-  priceDateTime: Date
+  priceDateTime: Date,
+  creationTime: Date,
+  publishTime: Date,
+  receivedTime: Date,
 }

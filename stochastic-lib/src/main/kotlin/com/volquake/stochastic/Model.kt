@@ -10,7 +10,19 @@ import java.time.ZoneId
 import java.time.temporal.ChronoUnit
 import java.time.temporal.TemporalUnit
 
-data class BidOfferPrice(val underlying: String, val bid: BigDecimal, val offer: BigDecimal, @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss") val priceDateTime: LocalDateTime) : Serializable
+data class BidOfferPrice(
+    val underlying: String,
+    val bid: BigDecimal,
+    val offer: BigDecimal,
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    val priceDateTime: LocalDateTime,
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    val creationTime: LocalDateTime = LocalDateTime.now(Clock.systemDefaultZone()),
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    val  publishTime: LocalDateTime = LocalDateTime.now(Clock.systemDefaultZone()),
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    val  receivedTime: LocalDateTime = LocalDateTime.now(Clock.systemDefaultZone()),
+) : Serializable
 
 data class StochasticProcessParameters(val underlying: String, val mu: Double, val sigma: Double, val startPrice: BigDecimal, val frequency: Frequency = Frequency.SECOND, val startTime: LocalDateTime?)
 
