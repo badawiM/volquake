@@ -9,6 +9,8 @@ spring:
     port: 5672
     username: myapp
     password: mypass
+  jackson:
+    time-zone: Europe/London
 
 rabbitmq:
   exchanges:
@@ -21,4 +23,5 @@ rabbitmq:
 publisher:
   configurationFile: stocks.csv
   intervalInMills: 50
+  publishAsync: false
 

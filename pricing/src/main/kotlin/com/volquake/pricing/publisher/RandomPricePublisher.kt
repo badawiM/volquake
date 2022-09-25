@@ -15,14 +15,18 @@ import java.util.*
 
 @Component
 class RandomPricePublisher(
-    @Value("\${publisher.intervalInMills}") intervalInMills: Int,
+    @Value("\${publisher.intervalInMills}")
+    private val intervalInMills: Int,
     private val pricersFactory: PricersFactory,
-    private val pricePublisher: PricePublisher
+    private val pricePublisher: PricePublisher,
+    @Value("\${publisher.publishAsync:false}")
+    private val publishAsync: Boolean
 ) : AbstractPricePublisher(intervalInMills, pricersFactory){
 
     private val random = Random()
 
     override fun pricesStream(subscriptionId: String): PriceStream = createBidOfferPublisher(subscriptionId)
+
 
     override fun priceStreamForTicker(subscriptionId: String, ticker: String): PriceStream = createPriceStream(interval, subscriptionId, ticker)
 
@@ -39,7 +43,9 @@ class RandomPricePublisher(
         return Flux.interval(interval)
             .map { if(ticker == null){ getRandomPrices() } else { getRandomPrice(ticker) } }
             .doOnNext {
-                pricePublisher.publishPrice(it, subscriptionId)
+                if (this.publishAsync) {
+                    pricePublisher.publishPrice(it, subscriptionId)
+                }
             }
             .share()
     }

@@ -12,6 +12,8 @@ spring:
     port: 5672
     username: myapp
     password: mypass
+  jackson:
+    time-zone: Europe/London
 
 logging:
   level:

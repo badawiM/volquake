@@ -1,5 +1,6 @@
 package com.volquake.stochastic
 
+import com.fasterxml.jackson.annotation.JsonFormat
 import java.io.Serializable
 import java.math.BigDecimal
 import java.time.Clock
@@ -9,7 +10,7 @@ import java.time.ZoneId
 import java.time.temporal.ChronoUnit
 import java.time.temporal.TemporalUnit
 
-data class BidOfferPrice(val underlying: String, val bid: BigDecimal, val offer: BigDecimal, val priceDateTime: LocalDateTime) : Serializable
+data class BidOfferPrice(val underlying: String, val bid: BigDecimal, val offer: BigDecimal, @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss") val priceDateTime: LocalDateTime) : Serializable
 
 data class StochasticProcessParameters(val underlying: String, val mu: Double, val sigma: Double, val startPrice: BigDecimal, val frequency: Frequency = Frequency.SECOND, val startTime: LocalDateTime?)
 
