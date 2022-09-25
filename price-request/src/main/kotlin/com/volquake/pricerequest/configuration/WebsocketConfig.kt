@@ -52,9 +52,7 @@ class WebSocketConfig(
         val stompRegistration = registry.addEndpoint("/stomp")
            .setAllowedOriginPatterns("**")
             .setHandshakeHandler(DefaultHandshakeHandler(UndertowRequestUpgradeStrategy()))
-           //.setAllowedOrigins("*")
-            //.setHandshakeHandler(DefaultHandshakeHandler(TomcatRequestUpgradeStrategy()))
-        if(sockJsEnabled){
+§        if(sockJsEnabled){
             stompRegistration.withSockJS()
                 //.setClientLibraryUrl( "https://cdn.jsdelivr.net/npm/sockjs-client@1.3.0/dist/sockjs.min.js" );
         }
