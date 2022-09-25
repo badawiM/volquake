@@ -1,6 +1,7 @@
 package com.volquake.stochastic
 
 import com.volquake.common.*
+import java.lang.NumberFormatException
 import java.math.BigDecimal
 import java.math.MathContext
 import java.math.RoundingMode
@@ -76,7 +77,15 @@ class GeneralizedWienerProcess(
 
     private fun scaledZ(price: BigDecimal) = z().times(price)
 
-    private fun z() = process.normalRandomGenerator.generateRandom().asBigDecimal()
+    private fun z(): BigDecimal {
+        val z = process.normalRandomGenerator.generateRandom();
+        try {
+            return z.asBigDecimal()
+        } catch (e: NumberFormatException){
+            logger().error("Failed to format $z as a BigDecimal")
+            throw e
+        }
+    }
 
     private fun format(v: Any) = decimalFormat.format(v)
 

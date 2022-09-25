@@ -3,6 +3,9 @@ server:
 spring:
   application:
     name: price-request
+  mvc:
+    pathmatch:
+      matching-strategy: ANT_PATH_MATCHER
   rabbitmq:
     addresses: localhost:5672
     host: host

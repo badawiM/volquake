@@ -8,14 +8,11 @@ import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.reactive.function.client.WebClient
 import reactor.core.publisher.Flux
-import java.time.Clock
-import java.time.LocalDateTime
-import java.util.*
 
 @RestController
 class PriceRequestController(
     private val webClient: WebClient,
-    private val clock: Clock
+
 ) {
 
     companion object{
@@ -33,13 +30,16 @@ class PriceRequestController(
             }
             .retrieve()
             .bodyToFlux(BidOfferPrice::class.java)
-            .doOnNext{
-                logger().info("Received @${LocalDateTime.now(clock)} ${it.underlying}[${it.priceDateTime}] = ${it.bid}/${it.offer}")
-            }
+
 
 
     }
 
+    fun cancelPriceRequest(subscribedStream: SubscribedStream) {
+        logger().error("CANCELLATION HAS NOT BEEN IMPLEMENTED")
+    }
+
     private fun generateSubscriptionId() = RandomStringUtils.random(SHORT_ID_LENGTH)
+
 
 }
