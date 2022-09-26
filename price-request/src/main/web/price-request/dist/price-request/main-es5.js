@@ -1,8 +1,8 @@
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["main"], {
   /***/
@@ -51,7 +51,27 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<h1>hello</h1>\n";
+    __webpack_exports__["default"] = "<h3>Live Price Streaming</h3>\n<price [price]=\"this.prices$ | async\" ></price>\n";
+    /***/
+  },
+
+  /***/
+  "./node_modules/raw-loader/dist/cjs.js!./src/app/price-component/price.component.html":
+  /*!********************************************************************************************!*\
+    !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/price-component/price.component.html ***!
+    \********************************************************************************************/
+
+  /*! exports provided: default */
+
+  /***/
+  function node_modulesRawLoaderDistCjsJsSrcAppPriceComponentPriceComponentHtml(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony default export */
+
+
+    __webpack_exports__["default"] = "<pre>\n  Underlying {{price.underlying}}\n  Bid {{price.bid}}\n  Offer {{price.offer}}\n  Price Time {{price.priceDateTime}}\n  Publish Time {{price.}}\n</pre>\n";
     /***/
   },
 
@@ -710,12 +730,38 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
     /*! @angular/core */
     "./node_modules/@angular/core/fesm2015/core.js");
+    /* harmony import */
 
-    var AppComponent = /*#__PURE__*/_createClass(function AppComponent() {
-      _classCallCheck(this, AppComponent);
 
-      this.title = 'price-request';
-    });
+    var _price_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! ./price-service */
+    "./src/app/price-service.ts");
+
+    var AppComponent = /*#__PURE__*/function () {
+      function AppComponent(priceService) {
+        _classCallCheck(this, AppComponent);
+
+        this.priceService = priceService;
+        this.title = 'price-request';
+      }
+
+      _createClass(AppComponent, [{
+        key: "ngOnInit",
+        value: function ngOnInit() {
+          console.log("Subscribing to stream");
+          this.prices$ = this.priceService.subscribeToPriceStream("foo");
+          console.log("Subscribed to stream");
+        }
+      }]);
+
+      return AppComponent;
+    }();
+
+    AppComponent.ctorParameters = function () {
+      return [{
+        type: _price_service__WEBPACK_IMPORTED_MODULE_2__["PriceService"]
+      }];
+    };
 
     AppComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
       selector: 'app-root',
@@ -796,13 +842,31 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var _rx_stomp_service_provider__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
     /*! ./rx-stomp-service.provider */
     "./src/app/rx-stomp-service.provider.ts");
+    /* harmony import */
+
+
+    var _price_component_price_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
+    /*! ./price-component/price.component */
+    "./src/app/price-component/price.component.ts");
+    /* harmony import */
+
+
+    var _angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
+    /*! @angular/platform-browser-dynamic */
+    "./node_modules/@angular/platform-browser-dynamic/fesm2015/platform-browser-dynamic.js");
+    /* harmony import */
+
+
+    var _price_service__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
+    /*! ./price-service */
+    "./src/app/price-service.ts");
 
     var AppModule = /*#__PURE__*/_createClass(function AppModule() {
       _classCallCheck(this, AppModule);
     });
 
     AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["NgModule"])({
-      declarations: [_app_component__WEBPACK_IMPORTED_MODULE_4__["AppComponent"]],
+      declarations: [_app_component__WEBPACK_IMPORTED_MODULE_4__["AppComponent"], _price_component_price_component__WEBPACK_IMPORTED_MODULE_8__["PriceComponent"]],
       imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_2__["BrowserModule"], _angular_common_http__WEBPACK_IMPORTED_MODULE_5__["HttpClientModule"]],
       providers: [{
         provide: _environments_environment_config__WEBPACK_IMPORTED_MODULE_6__["ENV_CONFIG_TOKEN"],
@@ -812,9 +876,202 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         provide: _rx_stomp_service_provider__WEBPACK_IMPORTED_MODULE_7__["RX_STOMP_CONFIG_TOKEN"],
         useValue: _rx_stomp_service_provider__WEBPACK_IMPORTED_MODULE_7__["injectableRxStompConfig"],
         deps: [_environments_environment_config__WEBPACK_IMPORTED_MODULE_6__["ENV_CONFIG_TOKEN"]]
-      }, _rx_stomp_service_provider__WEBPACK_IMPORTED_MODULE_7__["stompServiceProvider"]],
+      }, _rx_stomp_service_provider__WEBPACK_IMPORTED_MODULE_7__["stompServiceProvider"], _price_service__WEBPACK_IMPORTED_MODULE_10__["PriceService"]],
       bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_4__["AppComponent"]]
     })], AppModule);
+    Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_9__["platformBrowserDynamic"])().bootstrapModule(AppModule, {
+      providers: [{
+        provide: _angular_core__WEBPACK_IMPORTED_MODULE_3__["LOCALE_ID"],
+        useValue: 'en-GB'
+      }]
+    });
+    /***/
+  },
+
+  /***/
+  "./src/app/price-component/price.component.scss":
+  /*!******************************************************!*\
+    !*** ./src/app/price-component/price.component.scss ***!
+    \******************************************************/
+
+  /*! exports provided: default */
+
+  /***/
+  function srcAppPriceComponentPriceComponentScss(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony default export */
+
+
+    __webpack_exports__["default"] = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3ByaWNlLWNvbXBvbmVudC9wcmljZS5jb21wb25lbnQuc2NzcyJ9 */";
+    /***/
+  },
+
+  /***/
+  "./src/app/price-component/price.component.ts":
+  /*!****************************************************!*\
+    !*** ./src/app/price-component/price.component.ts ***!
+    \****************************************************/
+
+  /*! exports provided: PriceComponent */
+
+  /***/
+  function srcAppPriceComponentPriceComponentTs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "PriceComponent", function () {
+      return PriceComponent;
+    });
+    /* harmony import */
+
+
+    var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! tslib */
+    "./node_modules/tslib/tslib.es6.js");
+    /* harmony import */
+
+
+    var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! @angular/core */
+    "./node_modules/@angular/core/fesm2015/core.js");
+
+    var PriceComponent = /*#__PURE__*/function () {
+      function PriceComponent() {
+        _classCallCheck(this, PriceComponent);
+
+        this.title = 'price-tile';
+      }
+
+      _createClass(PriceComponent, [{
+        key: "ngOnInit",
+        value: function ngOnInit() {}
+      }]);
+
+      return PriceComponent;
+    }();
+
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()], PriceComponent.prototype, "price", void 0);
+    PriceComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+      selector: 'price',
+      template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
+      /*! raw-loader!./price.component.html */
+      "./node_modules/raw-loader/dist/cjs.js!./src/app/price-component/price.component.html"))["default"],
+      styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
+      /*! ./price.component.scss */
+      "./src/app/price-component/price.component.scss"))["default"]]
+    })], PriceComponent);
+    /***/
+  },
+
+  /***/
+  "./src/app/price-service.ts":
+  /*!**********************************!*\
+    !*** ./src/app/price-service.ts ***!
+    \**********************************/
+
+  /*! exports provided: PriceService, PRICING_STOMP_PREFIX, PriceStompTopics */
+
+  /***/
+  function srcAppPriceServiceTs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "PriceService", function () {
+      return PriceService;
+    });
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "PRICING_STOMP_PREFIX", function () {
+      return PRICING_STOMP_PREFIX;
+    });
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "PriceStompTopics", function () {
+      return PriceStompTopics;
+    });
+    /* harmony import */
+
+
+    var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! tslib */
+    "./node_modules/tslib/tslib.es6.js");
+    /* harmony import */
+
+
+    var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! @angular/core */
+    "./node_modules/@angular/core/fesm2015/core.js");
+    /* harmony import */
+
+
+    var _rx_stomp_service_provider__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! ./rx-stomp-service.provider */
+    "./src/app/rx-stomp-service.provider.ts");
+    /* harmony import */
+
+
+    var _stomp_ng2_stompjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! @stomp/ng2-stompjs */
+    "./node_modules/@stomp/ng2-stompjs/fesm2015/stomp-ng2-stompjs.js");
+    /* harmony import */
+
+
+    var rxjs_operators__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    /*! rxjs/operators */
+    "./node_modules/rxjs/_esm2015/operators/index.js");
+
+    var PriceService = /*#__PURE__*/function () {
+      function PriceService(stompService) {
+        _classCallCheck(this, PriceService);
+
+        this.stompService = stompService;
+      }
+
+      _createClass(PriceService, [{
+        key: "subscribeToPriceStream",
+        value: function subscribeToPriceStream(subscriptionId) {
+          //const topic = PriceStompTopics.PriceStream(subscriptionId)
+          var topic = '/topic/pricestream';
+          return this.stompService.watch(topic).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["filter"])(function (message) {
+            return message != null;
+          }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(function (message) {
+            return console.log("Received ".concat(JSON.parse(message.body)));
+          }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (message) {
+            return JSON.parse(message.body);
+          }));
+        }
+      }]);
+
+      return PriceService;
+    }();
+
+    PriceService.ctorParameters = function () {
+      return [{
+        type: _stomp_ng2_stompjs__WEBPACK_IMPORTED_MODULE_3__["RxStompService"],
+        decorators: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Inject"],
+          args: [_rx_stomp_service_provider__WEBPACK_IMPORTED_MODULE_2__["RX_STOMP_SERVICE_TOKEN"]]
+        }]
+      }];
+    };
+
+    PriceService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(), tslib__WEBPACK_IMPORTED_MODULE_0__["__param"](0, Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Inject"])(_rx_stomp_service_provider__WEBPACK_IMPORTED_MODULE_2__["RX_STOMP_SERVICE_TOKEN"]))], PriceService);
+    var PRICING_STOMP_PREFIX = '/topic/pricestream';
+    var PriceStompTopics = {
+      PriceStream: function PriceStream(subscriptionId) {
+        return "".concat(PRICING_STOMP_PREFIX).concat(subscriptionId);
+      }
+    };
     /***/
   },
 
@@ -824,7 +1081,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     !*** ./src/app/rx-stomp-service.provider.ts ***!
     \**********************************************/
 
-  /*! exports provided: RX_STOMP_CONFIG_TOKEN, RX_STOMP_SERVICE_TOKEN, injectableRxStompConfig, blotterRxStompServiceFactory, stompServiceProvider */
+  /*! exports provided: RX_STOMP_CONFIG_TOKEN, RX_STOMP_SERVICE_TOKEN, injectableRxStompConfig, createRxStompServiceFactory, stompServiceProvider */
 
   /***/
   function srcAppRxStompServiceProviderTs(module, __webpack_exports__, __webpack_require__) {
@@ -852,8 +1109,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony export (binding) */
 
 
-    __webpack_require__.d(__webpack_exports__, "blotterRxStompServiceFactory", function () {
-      return blotterRxStompServiceFactory;
+    __webpack_require__.d(__webpack_exports__, "createRxStompServiceFactory", function () {
+      return createRxStompServiceFactory;
     });
     /* harmony export (binding) */
 
@@ -892,8 +1149,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /*! ../environments/environment.config */
     "./src/environments/environment.config.ts");
 
-    var RX_STOMP_CONFIG_TOKEN = new _angular_core__WEBPACK_IMPORTED_MODULE_3__["InjectionToken"]("BlotterStompConfig");
-    var RX_STOMP_SERVICE_TOKEN = new _angular_core__WEBPACK_IMPORTED_MODULE_3__["InjectionToken"]("BlotterRxStompService");
+    var RX_STOMP_CONFIG_TOKEN = new _angular_core__WEBPACK_IMPORTED_MODULE_3__["InjectionToken"]("RxStompConfig");
+    var RX_STOMP_SERVICE_TOKEN = new _angular_core__WEBPACK_IMPORTED_MODULE_3__["InjectionToken"]("RxStompService");
     var injectableRxStompConfig = {
       brokerURL: _environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].websocketEndpoint,
       reconnectDelay: 1000,
@@ -903,13 +1160,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }
     };
 
-    function blotterRxStompServiceFactory(stompConfig, envConfig) {
+    function createRxStompServiceFactory(stompConfig, envConfig) {
       return Object(_stomp_ng2_stompjs__WEBPACK_IMPORTED_MODULE_1__["rxStompServiceFactory"])(stompConfig);
     }
 
     var stompServiceProvider = {
       provide: RX_STOMP_SERVICE_TOKEN,
-      useFactory: blotterRxStompServiceFactory,
+      useFactory: createRxStompServiceFactory,
       deps: [RX_STOMP_CONFIG_TOKEN, _environments_environment_config__WEBPACK_IMPORTED_MODULE_4__["ENV_CONFIG_TOKEN"]]
     };
     /***/
@@ -1000,9 +1257,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var environment = {
       production: false,
       useStubStompService: false,
-      websocketEndpoint: " ".concat(Object(_environment_config__WEBPACK_IMPORTED_MODULE_1__["websocketScheme"])(), "://localhost:8080/blotter/stomp"),
-      //websocketEndpoint: `ws://localhost:8080/blotter/stomp`,
-      blotterAppPath: '/blotter-app'
+      websocketEndpoint: " ".concat(Object(_environment_config__WEBPACK_IMPORTED_MODULE_1__["websocketScheme"])(), "://localhost:8081/stomp")
     };
     /***/
   },
@@ -1058,6 +1313,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_2__["platformBrowserDynamic"])().bootstrapModule(_app_app_module__WEBPACK_IMPORTED_MODULE_3__["AppModule"])["catch"](function (err) {
       return console.error(err);
     });
+    Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_2__["platformBrowserDynamic"])().bootstrapModule(_app_app_module__WEBPACK_IMPORTED_MODULE_3__["AppModule"])["catch"](function (err) {
+      return console.error(err);
+    });
     /***/
   },
 
@@ -1072,7 +1330,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   /***/
   function _(module, exports, __webpack_require__) {
     module.exports = __webpack_require__(
-    /*! /Users/johnedwards/development/volquake/price-request/src/main/web/price-request/src/main.ts */
+    /*! /Users/johnedwards/development/check/volquake/price-request/src/main/web/price-request/src/main.ts */
     "./src/main.ts");
     /***/
   }

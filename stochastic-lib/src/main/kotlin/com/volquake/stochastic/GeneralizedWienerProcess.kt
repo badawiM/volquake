@@ -78,12 +78,11 @@ class GeneralizedWienerProcess(
     private fun scaledZ(price: BigDecimal) = z().times(price)
 
     private fun z(): BigDecimal {
-        val z = process.normalRandomGenerator.generateRandom();
-        try {
-            return z.asBigDecimal()
-        } catch (e: NumberFormatException){
-            logger().error("Failed to format $z as a BigDecimal")
-            throw e
+        val z = process.normalRandomGenerator.generateRandom()
+        return if(z.isNaN()){
+            z() //no idea why the normal generator sometimes returns NaN - maybe because its a bit shit...
+        } else{
+            z.toBigDecimal()
         }
     }
 
