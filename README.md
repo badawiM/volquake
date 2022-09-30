@@ -10,7 +10,7 @@ This project demonstrates streaming prices over a reactive websocket then put ov
 
 - Start `price-request` (this is the where it asks for the price stream so simulating a blotter)
 
-- Start `pricing` (this is the where the prices can be generated simulating a [Generalized Wiener Process](https://en.wikipedia.org/wiki/Generalized_Wiener_process#:~:text=In%20statistics%2C%20a%20generalized%20Wiener,at%20every%20point%20in%20time.) or [Brownian Motion](https://en.wikipedia.org/wiki/Brownian_motion. This is cool finance shizzle and if you're interested I'll explain it to you )
+- Start `pricing` (this is the where the prices can be generated simulating a [Generalized Wiener Process](https://en.wikipedia.org/wiki/Generalized_Wiener_process#:~:text=In%20statistics%2C%20a%20generalized%20Wiener,at%20every%20point%20in%20time.) or [Brownian Motion](https://en.wikipedia.org/wiki/Brownian_motion). This is cool finance shizzle and if you're interested I'll explain it to you )
 
 - Start the UI in `price-request` with `npm serve` 
 
