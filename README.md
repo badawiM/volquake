@@ -14,7 +14,7 @@ This project demonstrates streaming prices over a reactive websocket then put ov
 
 - Start the UI in `price-request` with `npm serve` 
 
-- Go to [http://localhost:4200/](http://localhost:4200/) and be awestruck by my Angular pimp game. Actually, I think it hardcodes the ticker to `VOD.L` right now but you can change the UI to pass another ticker but they must be listed in the config otherwise it doesn't have the stochastic parameters.
+- Go to [http://localhost:4200/](http://localhost:4200/) and be awestruck by my Angular pimp game. ("hey... I tell you I was full-stack, baby?") Actually, I think it hardcodes the ticker to `VOD.L` right now but you can change the UI to pass another ticker but they must be listed in the config otherwise it doesn't have the stochastic parameters.
 
 - The stocks prices generated for are in `pricing/src/main/resources` and parameters are underlying,mu (i.e. the mean drift or expected yearly return),sigma (volatility) and startPrice - so if you can crank up volatility to make prices bounce around even more
 
