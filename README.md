@@ -24,7 +24,7 @@ publisher:
   intervalInMills: 50
 ```
 
-- Now pour yourself a [brandy](https://www.courvoisier.com/en-gb/) - [possibly](https://www.cdc.gov/tobacco/basic_information/health_effects/cancer/index.htm) crack open a cuban cigar - and read Louis Bachelier's [Theory of Speculation](https://press.princeton.edu/books/hardcover/9780691117522/louis-bacheliers-theory-of-speculation). (Possibly the second most famous French stockbroker after [Paul Gaughin](https://en.wikipedia.org/wiki/Paul_Gauguin) ) 
+- Now pour yourself a [brandy](https://www.courvoisier.com/en-gb/) - [possibly](https://www.cdc.gov/tobacco/basic_information/health_effects/cancer/index.htm) break out the [cuban cigars](https://www.havanahouse.co.uk/product-category/cuban/montecristo/) - and read Louis Bachelier's [Theory of Speculation](https://press.princeton.edu/books/hardcover/9780691117522/louis-bacheliers-theory-of-speculation). (Possibly the second most famous French stockbroker after [Paul Gaughin](https://en.wikipedia.org/wiki/Paul_Gauguin) ) 
 
 
 Trade safely, kids. And remember it's no fun being broke.
